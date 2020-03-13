@@ -1,0 +1,2 @@
+# golang-myblog
+my blog
