@@ -1,8 +1,9 @@
 package controllers
 
 import (
-	"strconv"
 	"golang-myblog/models"
+	"golang-myblog/utils"
+	"strconv"
 )
 
 type ShowArticleController struct {
@@ -22,7 +23,7 @@ func (this *ShowArticleController) Get() {
 
     // 设置模板数据
     this.Data["Title"] = art.Title
-    this.Data["Content"] = art.Content
+    this.Data["Content"] = utils.SwitchMarkdownToHtml(art.Content)
 
     // 设置渲染模板
     this.TplName = "show_article.html"
