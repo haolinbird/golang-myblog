@@ -81,3 +81,8 @@ func GetArticleWithId(id int) Article {
 
 	return art
 }
+
+// 更新文章信息
+func UpdateArticle(article Article) (int64, error) {
+    return utils.ModifyDB("update article set title=?,tags=?,short=?,content=? where id = ?", article.Title, article.Tags, article.Short, article.Content, article.Id)
+}
