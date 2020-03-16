@@ -3,6 +3,7 @@ package models
 import (
 	"golang-myblog/utils"
 	"fmt"
+	"strconv"
 )
 
 type Article struct {
@@ -59,4 +60,24 @@ func GetArticleListWithPage(page int, pagesize int) ([]Article, error) {
 	}
 
     return articleList, nil
+}
+
+// 获取指定文章信息
+func GetArticleWithId(id int) Article {
+	row := utils.QueryRowDB("select id,title,tags,short,content,author,createtime from article where id=" + strconv.Itoa(id))
+
+	// 读取文章数据
+	title   := ""
+	tags    := ""
+	short   := ""
+	content := ""
+	author  := ""
+	var createtime int64
+	createtime = 0
+	row.Scan(&id, &title, &tags, &short, &content, &author, &createtime)
+
+	// 返回数据
+	art := Article{id, title, tags, short, content, author, createtime}
+
+	return art
 }
