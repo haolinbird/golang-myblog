@@ -2,7 +2,7 @@ package models
 
 import (
     "fmt"
-    "myblognew/utils"
+    "golang-myblog/utils"
 )
 
 type User struct {

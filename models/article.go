@@ -1,7 +1,7 @@
 package models
 
 import (
-	"myblognew/utils"
+	"golang-myblog/utils"
 	"fmt"
 )
 
@@ -19,7 +19,13 @@ type Article struct {
 func AddArticle(article Article) (int64, error) {
 	sql := "insert into article(title,author,tags,short,content,createtime) values(?,?,?,?,?,?)"
 
-	return utils.ModifyDB(sql, article.Title, article.Tags, article.Short, article.Content, article.Author, article.Createtime)
+	result,err := utils.ModifyDB(sql, article.Title, article.Tags, article.Short, article.Content, article.Author, article.Createtime)
+	// 添加成功后更新文章总数
+	if err == nil {
+		SetArticleRowsNum()
+	}
+
+    return result, err
 }
 
 // 获取文章列表

@@ -3,8 +3,8 @@ package controllers
 import (
 	"fmt"
 	"github.com/astaxie/beego"
-	"myblognew/utils"
-	"myblognew/models"
+	"golang-myblog/utils"
+	"golang-myblog/models"
 )
 
 type LoginController struct {

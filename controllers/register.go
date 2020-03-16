@@ -2,10 +2,10 @@ package controllers
 
 import (
 	"github.com/astaxie/beego"
-	"myblognew/models"
+	"golang-myblog/models"
 	"time"
 	"fmt"
-	"myblognew/utils"
+	"golang-myblog/utils"
 )
 
 type RegisterController struct {

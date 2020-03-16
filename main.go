@@ -1,9 +1,9 @@
 package main
 
 import (
-	_ "myblognew/routers"
+	_ "golang-myblog/routers"
 	"github.com/astaxie/beego"
-	"myblognew/utils"
+	"golang-myblog/utils"
 )
 
 func main() {

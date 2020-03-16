@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"github.com/astaxie/beego"
-	"myblognew/models"
+	"golang-myblog/models"
 	"time"
 )
 

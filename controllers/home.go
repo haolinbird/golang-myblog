@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"myblognew/models"
+	"golang-myblog/models"
 )
 
 type HomeController struct {
@@ -18,15 +18,14 @@ func (this *HomeController) Get() {
 		page = 1
 	}
 
-	this.Data["PageCode"] = 1
-	this.Data["HasFooter"] = false
-
 	// 定义一个切片变量存储文章信息
 	var articleList []models.Article
 	// 根据分页获取文章列表
 	articleList, _ = models.GetArticleListWithPage(page, 10)
 	this.Data["Content"] = models.MakeHomeBlocks(articleList, this.IsLogin)
 
+	this.Data["PageCode"] = models.ConfigHomeFooterPageCode(page)
+	this.Data["HasFooter"] = true
 
 	this.TplName = "home.html"
 }
