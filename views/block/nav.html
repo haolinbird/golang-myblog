@@ -22,7 +22,6 @@
     <div id="nav-login">
         <ul>
         {{if .IsLogin}}
-            <li>{{.LoginUser}}</li>
             <li><a href='javascript:if(confirm("确定退出吗？")){location="/exit"}'>退出</a></li>
         {{else}}
             <li><a href="/login">登录</a></li>
