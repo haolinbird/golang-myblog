@@ -17,7 +17,7 @@ func (this *AlbumController) Get() {
 		logrus.Error(err)
 	}
 
-	this.Data["Alnum"] = albums
+	this.Data["Album"] = albums
 
 	// 设置渲染模板
 	this.TplName = "album.html"
