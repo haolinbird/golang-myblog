@@ -123,7 +123,7 @@ func QueryArticleWithParam(param string) []string {
 func GetArticleListWithTag(tag string) ([]Article, error) {
 	// 构造查询数据
 	sql := "select id,title,author,tags,short,content,createtime from article"
-	sql := " where tags like '%&" + tag + "&%'"
+	sql += " where tags like '%&" + tag + "&%'"
 	sql += " or tags like '%&" + tag + "'"
 	sql += " or tags like '" + tag + "&%'"
 	sql += " or tags like '" + tag + "'"

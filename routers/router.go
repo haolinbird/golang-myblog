@@ -32,4 +32,13 @@ func init() {
 
     // 标签页
     beego.Router("/tags", &controllers.TagsController{})
+
+    // 相册
+    beego.Router("/album", &controllers.AlbumController{})
+
+    // 上传图片
+    beego.Router("/upload", &controllers.UploadController{})
+
+    // 关于我们
+    beego.Router("/aboutme", &controllers.AboutMeController{})
 }
