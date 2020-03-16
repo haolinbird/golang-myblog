@@ -20,7 +20,7 @@ type Article struct {
 func AddArticle(article Article) (int64, error) {
 	sql := "insert into article(title,author,tags,short,content,createtime) values(?,?,?,?,?,?)"
 
-	result,err := utils.ModifyDB(sql, article.Title, article.Tags, article.Short, article.Content, article.Author, article.Createtime)
+	result,err := utils.ModifyDB(sql, article.Title, article.Author, article.Tags, article.Short, article.Content, article.Createtime)
 	// 添加成功后更新文章总数
 	if err == nil {
 		SetArticleRowsNum()
@@ -32,7 +32,8 @@ func AddArticle(article Article) (int64, error) {
 // 获取文章列表
 func GetArticleListWithPage(page int, pagesize int) ([]Article, error) {
     // 构造查询数据
-    sql := fmt.Sprintf("select id,title,author,tags,short,content,createtime from article limit %d,%d", page, pagesize)
+	page--
+    sql := fmt.Sprintf("select id,title,author,tags,short,content,createtime from article limit %d,%d", page * pagesize, pagesize)
 
     // 查询数据
     rows, err := utils.QueryDB(sql)
@@ -85,4 +86,17 @@ func GetArticleWithId(id int) Article {
 // 更新文章信息
 func UpdateArticle(article Article) (int64, error) {
     return utils.ModifyDB("update article set title=?,tags=?,short=?,content=? where id = ?", article.Title, article.Tags, article.Short, article.Content, article.Id)
+}
+
+// 删除文章
+func DeleteArticle(id int) (int64, error) {
+	// 删除文章
+	result, err := utils.ModifyDB("delete from article where id = ?", id)
+
+	// 删除文章成功后更新文章总数
+	if err == nil {
+		SetArticleRowsNum()
+	}
+
+	return result, err
 }

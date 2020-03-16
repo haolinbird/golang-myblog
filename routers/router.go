@@ -26,4 +26,7 @@ func init() {
 
     // 更新文章
     beego.Router("/article/update", &controllers.UpdateArticleController{})
+
+    // 删除文章
+    beego.Router("article/delete", &controllers.DeleteArticleController{})
 }
