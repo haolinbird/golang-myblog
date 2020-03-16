@@ -118,3 +118,40 @@ func QueryArticleWithParam(param string) []string {
 
 	return paramList
 }
+
+// 根据标签获取文章列表
+func GetArticleListWithTag(tag string) ([]Article, error) {
+	// 构造查询数据
+	sql := "select id,title,author,tags,short,content,createtime from article"
+	sql := " where tags like '%&" + tag + "&%'"
+	sql += " or tags like '%&" + tag + "'"
+	sql += " or tags like '" + tag + "&%'"
+	sql += " or tags like '" + tag + "'"
+
+	// 查询数据
+	rows, err := utils.QueryDB(sql)
+	if err != nil {
+		return nil, err
+	}
+
+	// 初始化一个切片来存储返回的文章列表
+	var articleList []Article
+	// 循环查询结果填充数据
+	for rows.Next() {
+		id := 0
+		title := ""
+		tags := ""
+		short := ""
+		content := ""
+		author := ""
+		var createtime int64
+		createtime = 0
+		// 获取字段数据
+		rows.Scan(&id, &title, &tags, &short, &content, &author, &createtime)
+		article := Article{id, title,tags,short,content,author,createtime}
+		// 填充切片
+		articleList = append(articleList, article)
+	}
+
+	return articleList, nil
+}
